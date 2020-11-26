@@ -1,5 +1,6 @@
 package com.yedam.board;
 
+
 public class BoardVo {
 	private int boardNo;
 	private String title;

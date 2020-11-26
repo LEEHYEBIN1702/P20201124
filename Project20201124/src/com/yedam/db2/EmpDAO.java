@@ -84,7 +84,7 @@ public class EmpDAO {
 	// 한건수정
 	public void updateEmp(EmployeeVO vo) {
 		conn = DAO.getConnection();
-		sql = "update emp1 " 
+		 sql = "update emp1 " 
 		       + "set email = nvl('" + vo.getEmail() + "', email)"
 				+ ", phone_number = nvl('" + vo.getPhoneNumber() + "', phone_number)"
 				+ ", salary = nvl (" + vo.getSalary() +", salary)"
