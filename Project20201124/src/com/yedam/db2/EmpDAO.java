@@ -17,10 +17,10 @@ public class EmpDAO {
 	EmployeeVO vo = new EmployeeVO();
 
 	// 전체조회
-	public List getEmpList() {
+	public List<EmployeeVO> getEmpList() {
 		conn = DAO.getConnection();
 		sql = "select * from emp1 order by 1";
-		List list = new ArrayList();
+		List<EmployeeVO> list = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -88,7 +88,7 @@ public class EmpDAO {
 		       + "set email = nvl('" + vo.getEmail() + "', email)"
 				+ ", phone_number = nvl('" + vo.getPhoneNumber() + "', phone_number)"
 				+ ", salary = nvl (" + vo.getSalary() +", salary)"
-				+ "where employee_id = " + vo.getEmployeeId();
+				+ " where employee_id = " + vo.getEmployeeId();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -119,7 +119,30 @@ public class EmpDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} 
+  
+	}	
+	
+	public List<EmployeeVO> getDeptList(String dept) {
+		conn = DAO.getConnection();
+		sql = "select * from emp1 where department_id = (select department_id from departments where department_name = ?)";
+		List<EmployeeVO> list = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dept);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				EmployeeVO vo = new EmployeeVO();
+				vo.setEmployeeId(rs.getInt("employee_id"));
+				vo.setFirstName(rs.getString("first_name"));
+				vo.setLastName(rs.getString("last_name"));
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-
+		return list;
+		
 	}
+
 }

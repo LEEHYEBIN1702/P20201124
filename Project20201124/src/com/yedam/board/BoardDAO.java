@@ -63,14 +63,14 @@ public class BoardDAO {
 //한건 입력
 	public void insertBod(BoardVo boardVo) {
 		conn = DAO.getConnection();
-		String sql = "insert into board(board_no, title, content, writer, creation_date) values(?,?,?,?,?)";
+		String sql = "insert into board(board_no, title, content, writer, creation_date) values(?,?,?,?,sysdate)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardVo.getBoardNo());
 			pstmt.setString(2, boardVo.getTitle());
 			pstmt.setString(3, boardVo.getContent());
 			pstmt.setString(4, boardVo.getWriter());
-			pstmt.setString(5, boardVo.getCreationDate());
+//			pstmt.setString(5, boardVo.getCreationDate());
 
 			int r = pstmt.executeUpdate();
 
@@ -85,11 +85,12 @@ public class BoardDAO {
 		conn = DAO.getConnection();
 		 sql = "update board "
 				+ "set board_no = nvl(" + boardVo.getBoardNo() + ", board_no)" 
-				+ ", title = nvl("+ boardVo.getTitle() + ", title)"
-		                + ", content = nvl(" + boardVo.getContent() + ", content)"
-		                + ", writer = nvl(" + boardVo.getWriter() + ", writer)"
-				+ ", creation_date = nvl(" + boardVo.getCreationDate() + ", creation_date)" 
+				+ ", title = nvl('"+ boardVo.getTitle() + "', title)"
+		                + ", content = nvl('" + boardVo.getContent() + "', content)"
+		                + ", writer = nvl('" + boardVo.getWriter() + "', writer)"
+				+ ", creation_date = nvl('" + boardVo.getCreationDate() + "', creation_date)" 
 		                + "where board_no = " + boardVo.getBoardNo();
+		 System.out.println(sql);
 
 		try { 
 			pstmt = conn.prepareStatement(sql);

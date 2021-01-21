@@ -8,4 +8,7 @@ public interface EmpService {
    public void insertEmp(EmployeeVO empVo);//입력
    public void updateEmp(EmployeeVO empVo);//수정
    public void deleteEmp(int empId);//삭제
+   public List<EmployeeVO> getDeptList(String dept);
+   //IT, Purchasing, Shipping
+   //추상메소드만 구현해놓은 인터페이스
 }

@@ -39,15 +39,15 @@ public class Boardmain {
 				String content = scn.nextLine();
 				System.out.println("writer를 입력하세요");
 				String writer = scn.nextLine();
-				System.out.println("creationDate를 입력하세요");
-				String creationDate = scn.nextLine();
+//				System.out.println("creationDate를 입력하세요");
+//				String creationDate = scn.nextLine();
 
 				BoardVo Bod = new BoardVo();
 				Bod.setBoardNo(boardNo);
 				Bod.setTitle(title);
 				Bod.setContent(content);
 				Bod.setWriter(writer);
-				Bod.setCreationDate(creationDate);
+//				Bod.setCreationDate(creationDate);
 
 				service.insertBod(Bod);
 
